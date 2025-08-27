@@ -26,5 +26,6 @@ RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 EXPOSE 8080
 
 # Lancer Laravel en utilisant le port fourni par Railway
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT}"]
+CMD sh -c "php artisan serve --host=0.0.0.0 --port=\$PORT"
+
 
