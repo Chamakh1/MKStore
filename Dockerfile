@@ -22,8 +22,9 @@ RUN composer install --optimize-autoloader --no-dev
 # Donner les bons droits
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
-# Exposer le port 8080 (Railway l’attend)
+# Exposer le port dynamique Railway
 EXPOSE 8080
 
-# Lancer Laravel via artisan serve
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
+# Lancer Laravel en utilisant le port fourni par Railway
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT}"]
+
