@@ -20,6 +20,5 @@ RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 # Configurer Nginx pour Laravel
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 8080
-
-CMD service nginx start && php-fpm
+EXPOSE 9000
+CMD ["php-fpm"]
