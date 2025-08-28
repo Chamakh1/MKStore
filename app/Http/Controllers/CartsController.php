@@ -96,7 +96,7 @@ public function AffichePanier()
             $this->updateCartTotals($carts);
            
 
-            return redirect()->back()->with('success', 'Produit ajouté au panier.');
+            return view('guest.panier');
         
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Erreur lors de l\'ajout du produit au panier. Veuillez réessayer.');
