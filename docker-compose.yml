@@ -11,9 +11,6 @@ services:
       - .:/var/www
     networks:
       - laravel
-    depends_on:
-      - db
-    
 
   webserver:
     image: nginx:alpine
@@ -29,25 +26,5 @@ services:
     networks:
       - laravel
 
-  db:
-    image: mysql:8.0
-    container_name: mysql_db
-    restart: unless-stopped
-    command: --default-authentication-plugin=mysql_native_password --ssl=0
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: eshop
-      MYSQL_USER: oumaima
-      MYSQL_PASSWORD: oumaimapass
-    ports:
-      - "3306:3306"
-    volumes:
-      - dbdata:/var/lib/mysql
-    networks:
-      - laravel
-
 networks:
   laravel:
-
-volumes:
-  dbdata:
