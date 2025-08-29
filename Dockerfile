@@ -28,17 +28,8 @@ RUN composer install --optimize-autoloader --no-dev \
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# ... autres instructions ...
+# Exposer le port Railway
+EXPOSE 8080
 
-# Copier le template nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf.template
-
-# Copier le script de démarrage
-COPY start.sh /usr/local/bin/start.sh
-RUN chmod +x /usr/local/bin/start.sh
-
-# Exposer le port
-EXPOSE $PORT
-
-# Lancer le script de démarrage
-CMD ["/usr/local/bin/start.sh"]
+# Lancer supervisord (qui lance PHP-FPM + Nginx)
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
